@@ -68,7 +68,7 @@ following namespace:
 ```typescript
 import { TrueForge } from "@truefoundry/trueforge-sdk";
 
-const request: TrueForge.CreateAgentRequest = {
+const request: TrueForge.UpdateAgentRequest = {
     ...
 };
 ```
