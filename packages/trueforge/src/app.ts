@@ -18,6 +18,7 @@ import { createMcpOAuthRouter } from './apis/mcpOAuth';
 import { createMcpServersRouter } from './apis/mcpServers';
 import { createModelsRouter } from './apis/models';
 import { createSchedulesRouter } from './apis/schedules';
+import { createAgentImportRouter } from './apis/agentImport';
 import { createInternalMetricsRouter } from './apis/sessionMetrics';
 import { createInternalSessionsRouter, createSessionsRouter } from './apis/sessions';
 import { createSettingsRouter } from './apis/settings';
@@ -350,6 +351,15 @@ export function createServerApp<TTransaction>(deps: ServerDeps<TTransaction>) {
         resolveRequestContext,
       }),
       adminAuthMiddleware,
+    ),
+  );
+  app.route(
+    '/api/internal/import',
+    withAuth(
+      createAgentImportRouter({
+        resolveAgentStore: deps.resolveAgentStore,
+      }),
+      authMiddleware,
     ),
   );
   app.route(
