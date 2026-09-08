@@ -5392,7 +5392,20 @@
     },
     "/api/internal/import/checkpoint": {
       "get": {
-        "description": "Min created_at among sessions with metadata.imported=true.",
+        "description": "Min created_at among imported sessions for one tenant (metadata.imported=true).",
+        "parameters": [
+          {
+            "description": "Tenant whose imported-session watermark to read.",
+            "in": "query",
+            "name": "tenant_id",
+            "required": true,
+            "schema": {
+              "description": "Tenant whose imported-session watermark to read.",
+              "minLength": 1,
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -5402,7 +5415,17 @@
                 }
               }
             },
-            "description": "Checkpoint watermark."
+            "description": "Per-tenant checkpoint watermark."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid query."
           },
           "500": {
             "content": {
@@ -5424,7 +5447,7 @@
     },
     "/api/internal/import/sessions": {
       "post": {
-        "description": "Ops/backfill only. Links agent_name when present; otherwise stores agent_name with null agent_id. 409 if session_id exists.",
+        "description": "Ops/backfill only. Named sessions link agent_name to a local agent when present; otherwise a dummy agent_id. Drafts use agent_spec. 409 if session_id exists.",
         "requestBody": {
           "content": {
             "application/json": {
