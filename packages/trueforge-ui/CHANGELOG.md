@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.3.0-rc.3
+
+### Minor Changes
+
+- 1d31116: Open agent model settings inline and support typed custom model parameters.
+- 74eae6c: Remove pagination from list MCP servers across the API, SDK, and UI; return and search the complete configured MCP catalog client-side.
+- 12b02ff: Open Runtime Config in a right-side drawer and label scheduled sessions consistently.
+- 7e25f68: Open Save Agent in a right-side drawer with only the agent name while preserving configuration from Agent Config.
+
+### Patch Changes
+
+- 26a9b80: Add an agent-scoped Schedules tab and route library schedule actions into it.
+- 1b8a3f7: Add documentation links to the code snippets view and shell actions.
+- 26a9b80: Allow sending user messages that contain attachments without text.
+- 26a9b80: Add an empty state and Build Agent action to the schedule agent picker.
+- 4c522e2: Bump `@truefoundry/assistant-ui-runtime` to `0.1.30`.
+- 4c522e2: Bump `@truefoundry/assistant-ui-runtime` to `0.1.31`.
+- d719155: Keep composer catalogs cached when starting a new chat.
+- e3973a5: Show the selected connector and skill count beside the composer tools icon.
+- 26a9b80: Hide model selection in the Build Agent composer and correct concurrent sub-agent timeline bars.
+- 26a9b80: Require direct switch clicks in the Runtime Config sidebar.
+- 1ec19f0: Replace API key replacement with connector configuration editing from the connector list and details view.
+- 54e4ec4: Keep Settings hidden until the server explicitly enables it.
+- 4c522e2: Hide session cost metrics when cost data is unavailable.
+- 26a9b80: Show agent names without an icon in the Agents table.
+- 4cea38c: Show draft and named sessions in the history panel, exclude agent-builder sessions, cache session pages, and switch history sessions in place without remounting the chat runtime.
+- 2284d3b: Polish the MCP tool selector controls, loading state, and API error messages.
+- e3973a5: Group schedule recurrence controls and display the cadence in an attached summary footer.
+- 26a9b80: Show weekly schedule days before the time controls.
+- 1b8a3f7: Match the Build Agent configuration panel width to the agent playground and identify sessions created by schedule runs.
+- adaf532: Widen the sidebar rail and its nav buttons so labels like "Build Agent" have more breathing room.
+- Updated dependencies [648273b]
+- Updated dependencies [74eae6c]
+- Updated dependencies [44f9cbe]
+  - @truefoundry/trueforge-sdk@0.2.0-rc.3
+
 ## 0.3.0-rc.2
 
 ### Minor Changes

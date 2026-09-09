@@ -1,5 +1,13 @@
 # @truefoundry/trueforge-core
 
+## 0.2.0-rc.3
+
+### Patch Changes
+
+- db37b6e: Sandbox skills: unify git and registry mounts onto `.tfy-desired-skills.json` (SkillMounter + skill_downloader), and always attach a mounter so existing skills are cleaned up.
+- 44f9cbe: TrueFoundry mode: env-backed Daytona | truefoundry sandbox via TRUEFOUNDRY_SANDBOX_* (static SETTINGS JSON). Settings OpenAPI stays Daytona-only (`SandboxProviderManifest`); truefoundry is store-internal (`StoredSandboxProviderManifest`).
+- a5f220f: Dedupe LLM resolve within a turn so parent and sub-agents sharing a model name call deps.llm once.
+
 ## 0.2.0-rc.2
 
 ### Patch Changes

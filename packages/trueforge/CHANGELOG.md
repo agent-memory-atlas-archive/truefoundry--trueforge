@@ -1,5 +1,31 @@
 # @truefoundry/trueforge
 
+## 0.2.0-rc.3
+
+### Minor Changes
+
+- 74eae6c: Remove pagination from list MCP servers across the API, SDK, and UI; return and search the complete configured MCP catalog client-side.
+
+### Patch Changes
+
+- db37b6e: Sandbox skills: unify git and registry mounts onto `.tfy-desired-skills.json` (SkillMounter + skill_downloader), and always attach a mounter so existing skills are cleaned up.
+- 4c522e2: Bump `@truefoundry/assistant-ui-runtime` to `0.1.30`.
+- 4c522e2: Bump `@truefoundry/assistant-ui-runtime` to `0.1.31`.
+- 2b6c566: Paginate `GET /api/v1/schedules/{schedule_id}/runs` with `limit` / `page_token` and a `pagination` envelope.
+- a1af95d: Add public GET /api/v1/mcp-servers/{name} returning the chat projection with live per-user auth_status.
+- 555bef0: Allow sandbox artifact downloads to use paths relative to the sandbox working directory.
+- e307f15: Derive the UI public prefix from the pathname of `PUBLIC_BASE_URL` at process start so one published frontend can run behind any path-stripping proxy.
+- bb8d3d3: Persist optional `reason` on schedule runs when hand-off fails. Exposed on ScheduleRun responses as nullable string.
+- 46fadce: Point-lookup ServiceFoundry model integrations by provider account and model name, and fetch the full catalog in one unpaginated request.
+- 44f9cbe: TrueFoundry mode: env-backed Daytona | truefoundry sandbox via TRUEFOUNDRY_SANDBOX_* (static SETTINGS JSON). Settings OpenAPI stays Daytona-only (`SandboxProviderManifest`); truefoundry is store-internal (`StoredSandboxProviderManifest`).
+- Updated dependencies [db37b6e]
+- Updated dependencies [648273b]
+- Updated dependencies [74eae6c]
+- Updated dependencies [44f9cbe]
+- Updated dependencies [a5f220f]
+  - @truefoundry/trueforge-core@0.2.0-rc.3
+  - @truefoundry/trueforge-sdk@0.2.0-rc.3
+
 ## 0.2.0-rc.2
 
 ### Patch Changes
