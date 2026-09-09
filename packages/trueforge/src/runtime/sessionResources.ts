@@ -21,7 +21,7 @@ import type { ISandboxProviderStore } from '../db/sandboxProviderStore';
 import type { ISkillStore } from '../db/skillStore';
 import { LocalSandboxProvider } from '../sandbox/local/provider/LocalSandboxProvider';
 import { getCachedLocalSandboxSupport, isLocalSandboxFallbackEnabled } from '../sandbox/localRuntime';
-import { toDaytonaSandboxProvider } from '../sandbox/providerUtils';
+import { toSandboxProviderFromRecord } from '../sandbox/providerUtils';
 import type { ReasoningEffort } from '../schemas/modelProvider';
 
 export interface McpConnection {
@@ -169,7 +169,7 @@ export async function resolveGitSkills({
 /**
  * Build a runtime SandboxProvider from the configured store row, or the
  * in-memory local fallback when standalone + the cached probe is supported.
- * Builds a fresh Daytona client per call (no network I/O).
+ * Builds a fresh provider client per call (no network I/O).
  */
 /** Single path segment under the sandboxes parent (`_` when sessionId is missing or unsafe). */
 export function localSandboxSessionSegment(sessionId: string | undefined): string {
@@ -192,14 +192,7 @@ export async function resolveSandboxProvider({
 }): Promise<SandboxProvider | undefined> {
   const record = await store.getSandboxProvider(tenant_id);
   if (record !== undefined) {
-    // Clone from the snapshot that was actually built (persisted build_ref), not a name
-    // derived from the current image — otherwise an image bump breaks creation until rebuild.
-    return toDaytonaSandboxProvider({
-      manifest: record.manifest,
-      tenant_id,
-      logger,
-      build_metadata: record.build_metadata,
-    });
+    return toSandboxProviderFromRecord({ record, tenant_id, logger });
   }
   if (!configuration.STANDALONE) {
     return undefined;
@@ -287,10 +280,8 @@ export async function validateAgentSpec({
         await mcpServerStore.listServers({
           tenant_id,
           names,
-          limit: Math.max(names.length, 1),
-          page_token: undefined,
         })
-      ).data.map(record => record.name),
+      ).map(record => record.name),
     );
     const unknown = requestedMcpServers.find(server => !configuredNames.has(server.name));
     if (unknown !== undefined) {
