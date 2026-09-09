@@ -29,6 +29,11 @@
           "created_by_subject": {
             "$ref": "#/components/schemas/CreatedBySubject"
           },
+          "description": {
+            "description": "Short summary of what the agent does.",
+            "maxLength": 1024,
+            "type": "string"
+          },
           "id": {
             "description": "Immutable server-generated agent identifier.",
             "minLength": 1,
@@ -44,6 +49,7 @@
         "required": [
           "id",
           "name",
+          "description",
           "manifest",
           "created_by_subject"
         ],
@@ -965,6 +971,12 @@
       "CreateAgentRequest": {
         "additionalProperties": false,
         "properties": {
+          "description": {
+            "default": "",
+            "description": "Short summary of what the agent does.",
+            "maxLength": 1024,
+            "type": "string"
+          },
           "manifest": {
             "$ref": "#/components/schemas/AgentSpec"
           },
@@ -4751,6 +4763,11 @@
       "UpdateAgentRequest": {
         "additionalProperties": false,
         "properties": {
+          "description": {
+            "description": "Short summary of what the agent does.",
+            "maxLength": 1024,
+            "type": "string"
+          },
           "manifest": {
             "$ref": "#/components/schemas/AgentSpec"
           }
@@ -5467,7 +5484,7 @@
         "x-fern-sdk-method-name": "get"
       },
       "put": {
-        "description": "Replaces the manifest for an existing agent keyed by immutable `agent_id`.",
+        "description": "Update an existing agent by immutable id.",
         "parameters": [
           {
             "description": "Immutable agent identifier.",
